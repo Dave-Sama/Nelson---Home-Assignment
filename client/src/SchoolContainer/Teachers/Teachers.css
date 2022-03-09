@@ -1,0 +1,188 @@
+.search {
+	display: flex;
+	flex-wrap: nowrap;
+	background-color: #f1f1f1;
+	border-radius: 10px 10px 0 0;
+	box-shadow: 0px 5px 5px 0px #c1c3cf;
+}
+
+.search .search-label {
+	/* background-color: #ffffff; */
+	border-radius: 10px;
+	width: 100px;
+	margin: 5px;
+	line-height: 45px;
+	font-size: 20px;
+}
+.about-me-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	margin: 50px 0 0 0;
+}
+
+.teacher-name-input {
+	max-width: 100%;
+	width: 85%;
+	border-radius: 10px;
+	margin: 10px;
+	border: none;
+	text-align: center;
+	background-color: rgba(180, 176, 167, 0.596);
+}
+
+.teacher-name-input::placeholder {
+	color: #ffffff;
+}
+.class-name-input::placeholder {
+	color: #ffffff;
+}
+
+input:focus::placeholder {
+	transition: 0.5s ease-in all;
+	color: rgb(124, 124, 124);
+}
+.class-name-input {
+	text-align: center;
+	max-width: 100%;
+	width: 85%;
+	border-radius: 10px;
+	margin: 10px;
+	border: none;
+	background-color: rgba(180, 176, 167, 0.596);
+}
+
+.search-label input[type='text']:focus {
+	transition: 0.5s all ease-out;
+	background-color: white;
+}
+
+.about-me-parent {
+	max-width: 100%;
+	width: 70%;
+}
+
+.about-me-card {
+	/* display: flex;
+	justify-content: center; */
+	width: 100%;
+	box-shadow: 0 0px 20px -2px #1f2235;
+	border-radius: 10px;
+	height: 650px;
+}
+
+.search-output {
+	background-color: #ff5823;
+}
+
+.about-me-profile {
+	width: 55%;
+	background-image: url('../../assets/AboutMe/Beautiful.jpeg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: rgba(240, 250, 240, 1);
+}
+
+.about-me-details {
+	width: 50%;
+	text-align: justify;
+	padding: 30px;
+}
+
+.about-me-description {
+	font-size: 15px;
+	font-family: 'Poppins Medium';
+	text-align: center;
+}
+
+.about-me-highlight {
+	font-family: 'Poppins Light';
+	margin: 30px 0;
+	font-size: 16px;
+
+	text-align: center;
+}
+
+.highlight-heading {
+	font-family: 'Poppins Medium';
+	text-decoration: underline;
+	font-size: 15px;
+	text-align: center;
+	margin: 0 0 20px 0;
+}
+
+.highlight {
+	display: flex;
+	align-items: center;
+	margin: 5px 0;
+	font-size: 15px;
+}
+
+.highlight-blob {
+	height: 12px;
+	width: 12px;
+	margin: 0 10px 0 0;
+	background-color: #ff5823;
+	border-radius: 50%;
+}
+
+.about-me-options .highlighted-btn {
+	margin: 0 0 0 30px;
+}
+.highlighted-btn:hover {
+	background-color: white;
+	transition: all 0.5s ease-in;
+	box-shadow: 1px 1px 10px #1f2235;
+}
+
+/* Ipad pro responsivness */
+@media only screen and (max-width: 1110px) {
+	.about-me-parent {
+		width: 88%;
+	}
+
+	.about-me-card {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		box-shadow: 0 0px 20px -2px #1f2235;
+		border-radius: 10px;
+		height: 500px;
+	}
+
+	.highlight {
+		/* margin: 5px 0; */
+		text-align: left;
+		font-size: 18px;
+		/* background-color: tomato; */
+	}
+}
+@media only screen and (max-width: 898px) {
+	.about-me-profile {
+		display: none;
+	}
+
+	.about-me-details {
+		width: 100%;
+	}
+
+	.about-me-description {
+		font-size: 18px;
+		font-family: 'Poppins Medium';
+		text-align: inherit;
+	}
+}
+
+@media only screen and (max-width: 466px) {
+	.about-me-options {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.about-me-options button {
+		width: 100%;
+	}
+}

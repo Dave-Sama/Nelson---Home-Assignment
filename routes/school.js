@@ -46,7 +46,7 @@ router.get('/teachers', (req, res) => {
 				res.send('something went wrong');
 			}
 			result = convert.xml2json(data, { compact: true, spaces: 4 });
-			res.send(JSON.parse(result));
+			res.status(200).send(JSON.parse(result));
 		});
 	} catch (err) {
 		console.log(err);
@@ -79,7 +79,7 @@ router.get('/classes', (req, res) => {
 				res.send('something went wrong');
 			}
 			result = convert.xml2json(data, { compact: true, spaces: 4 });
-			res.send(JSON.parse(result));
+			res.status(200).send(JSON.parse(result));
 		});
 	} catch (err) {
 		console.log(err);

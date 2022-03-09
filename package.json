@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"server": "nodemon index.js",
+		"server": "nodemon server.js",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run  server\" \"npm run client\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
@@ -15,6 +17,7 @@
 		"nodemon": "^2.0.15",
 		"swagger-jsdoc": "^6.1.0",
 		"swagger-ui-express": "^4.3.0",
-		"xml-js": "^1.6.11"
+		"xml-js": "^1.6.11",
+		"concurrently": "^7.0.0"
 	}
 }
