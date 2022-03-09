@@ -1,0 +1,32 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "GetChildren"
+    },
+    "host": "na1.ai.dm-us.informaticacloud.com:443",
+    "basePath": "/active-bpel/public/rt/aLFh1gf7rVmiTXJLVZgS29",
+    "schemes": ["https"],
+    "paths": {
+        "/GetChildren": {
+            "post": {
+                "description": "",
+                "operationId": "GetChildrenOperation",
+                "produces": ["text/plain"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "string",
+                            "xml": {
+                                "name": "GetChildrenResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
