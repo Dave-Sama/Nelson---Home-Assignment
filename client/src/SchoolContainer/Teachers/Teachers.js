@@ -36,8 +36,8 @@ export default function Teachers({ id }) {
 	}, []);
 
 	const Teachers = ({ name, email, phoneMobile, phoneHome, subject }) => {
-		if (Object.values(teachers) === null){
-			if
+		if (phoneMobile[0] == phoneHome[0]) {
+			phoneHome = ['Work', '----------'];
 		}
 		return (
 			<div className='row  teacher-container'>
@@ -131,7 +131,10 @@ export default function Teachers({ id }) {
 														teachers[index].Phone[0]._attributes.type,
 														teachers[index].Phone[0]._text,
 												  ]
-												: null
+												: [
+														teachers[index].Phone._attributes.type,
+														teachers[index].Phone._text,
+												  ]
 										}
 										phoneHome={
 											teachers[index].Phone[1] !== undefined
@@ -139,7 +142,10 @@ export default function Teachers({ id }) {
 														teachers[index].Phone[1]._attributes.type,
 														teachers[index].Phone[1]._text,
 												  ]
-												: null
+												: [
+														teachers[index].Phone._attributes.type,
+														teachers[index].Phone._text,
+												  ]
 										}
 										subject={
 											teachers[index].Subject && teachers[index].Subject._text
