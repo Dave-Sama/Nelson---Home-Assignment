@@ -36,6 +36,9 @@ export default function Teachers({ id }) {
 	}, []);
 
 	const Teachers = ({ name, email, phoneMobile, phoneHome, subject }) => {
+		if (Object.values(teachers) === null){
+			if
+		}
 		return (
 			<div className='row  teacher-container'>
 				<div className='col-3'>
@@ -53,17 +56,17 @@ export default function Teachers({ id }) {
 				</div>
 				<div className='w-100'></div>
 				<div className='col-3'>
-					<span className='label'>{phoneMobile[0]}:</span>
+					<span className='label'>{phoneMobile && phoneMobile[0]}:</span>
 				</div>
 				<div className='col'>
-					<span>{phoneMobile[1]}</span>
+					<span>{phoneMobile && phoneMobile[1]}</span>
 				</div>
 				<div className='w-100'></div>
 				<div className='col-3'>
-					<span className='label'>{phoneHome[0]}:</span>
+					<span className='label'>{phoneHome && phoneHome[0]}:</span>
 				</div>
 				<div className='col'>
-					<span>{phoneHome[1]}</span>
+					<span>{phoneHome && phoneHome[1]}</span>
 				</div>
 				<div className='w-100'></div>
 				<div className='col-3'>
@@ -116,7 +119,35 @@ export default function Teachers({ id }) {
 					{/* <div className='search-output'>{teachers && loopTeachers()}</div> */}
 					<div className='search-output'>
 						<>
-							{teachers[0] && (
+							{Object.values(teachers).map((value, index) => {
+								return (
+									<Teachers
+										key={index}
+										name={teachers[index].Name && teachers[index].Name._text}
+										email={teachers[index].Email && teachers[index].Email._text}
+										phoneMobile={
+											teachers[index].Phone[0] !== undefined
+												? [
+														teachers[index].Phone[0]._attributes.type,
+														teachers[index].Phone[0]._text,
+												  ]
+												: null
+										}
+										phoneHome={
+											teachers[index].Phone[1] !== undefined
+												? [
+														teachers[index].Phone[1]._attributes.type,
+														teachers[index].Phone[1]._text,
+												  ]
+												: null
+										}
+										subject={
+											teachers[index].Subject && teachers[index].Subject._text
+										}
+									/>
+								);
+							})}
+							{/* {teachers[0] && (
 								<Teachers
 									key={0}
 									name={teachers[0].Name && teachers[0].Name._text}
@@ -195,7 +226,7 @@ export default function Teachers({ id }) {
 									}
 									subject={teachers[1].Subject && teachers[1].Subject._text}
 								/>
-							)}
+							)} */}
 						</>
 					</div>
 
