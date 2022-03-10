@@ -46,6 +46,11 @@ router.get('/teachers', (req, res) => {
 				res.send('something went wrong');
 			}
 			result = convert.xml2json(data, { compact: true, spaces: 4 });
+
+			// console.log('result from conv is:');
+			// result = JSON.parse(result);
+			// console.log(result.Teachers.Teacher[0].Name._text);
+
 			res.status(200).send(JSON.parse(result));
 		});
 	} catch (err) {

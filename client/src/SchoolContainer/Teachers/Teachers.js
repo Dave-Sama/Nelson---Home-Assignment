@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './Teachers.css';
 import ScreenHeading from '../../Utilities/ScreenHeading/ScreenHeading';
 import ScrollService from '../../Utilities/ScrollService';
 import Animations from '../../Utilities/Animations';
+import axios from 'axios';
 
+import './Teachers.css';
 export default function Teachers({ id }) {
 	const [teacherName, setTeacherName] = useState('');
 	const [className, setClassName] = useState('');
+	const [teachers, setTeachers] = useState([]);
 
 	let fadeInScreenHandler = (screen) => {
 		if (screen.fadeInScreen != id) {
@@ -14,33 +16,95 @@ export default function Teachers({ id }) {
 		}
 		Animations.animations.fadeInScreen(id);
 	};
+
+	// useEffect(() => {
+	// 	fetch('/teachers')
+	// 		.then(async (data) => {
+	// 			await data.json().then((data) => setTeachers(data));
+	// 		})
+
+	// 		.catch((err) => console.log(err));
+	// }, []);
+
+	useEffect(async () => {
+		await axios
+			.get('/teachers')
+			.then((data) => {
+				if (data) {
+					console.log('fetched data:');
+					console.log(data.data.Teachers.Teacher);
+
+					// for (let i = 0; i < 10; ++i) {
+					// 	setTeachers((prev) => [...prev, data.data.Teachers.Teacher[i]]);
+					// }
+
+					let newData = data.data.Teachers.Teacher;
+					setTeachers((prevState) => ({
+						...prevState,
+						...newData,
+					}));
+				}
+			})
+			.catch((err) => console.log(err));
+	}, []);
+
+	const Teachers = () => {
+		console.log('teachers:');
+
+		if (teachers[0]) {
+			for (let i = 0; i < 10; ++i) {
+				let name = teachers[0].Name._text;
+				let email = teachers[0].Email._text;
+				let phone = [
+					[teachers[0].Phone[0]._attributes.type, teachers[0].Phone[0]._text],
+					[teachers[0].Phone[1]._attributes.type, teachers[0].Phone[1]._text],
+				];
+				let subject = teachers[0].Subject._text;
+
+				return (
+					<div className='row  teacher-container'>
+						<div className='col-3'>
+							<span className='label'> name: </span>
+						</div>
+						<div className='col'>
+							<span> {name}</span>
+						</div>
+						<div className='w-100'></div>
+						<div className='col-3'>
+							<span className='label'> email: </span>
+						</div>
+						<div className='col'>
+							<span> {email} </span>
+						</div>
+						<div className='w-100'></div>
+						<div className='col-3'>
+							<span className='label'>{phone[0][0]}:</span>
+						</div>
+						<div className='col'>
+							<span>{phone[0][1]}</span>
+						</div>
+						<div className='w-100'></div>
+						<div className='col-3'>
+							<span className='label'>{phone[1][0]}:</span>
+						</div>
+						<div className='col'>
+							<span>{phone[1][1]}</span>
+						</div>
+						<div className='w-100'></div>
+						<div className='col-3'>
+							<span className='label'> subject:</span>
+						</div>
+						<div className='col'>
+							<span> {subject}</span>
+						</div>
+					</div>
+				);
+			}
+		}
+	};
+
 	const fadeInSubscription =
 		ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
-	const SCREEN_CONSTANTS = {
-		description:
-			'Full Stack web and mobile developer with background knowledge of MERN stack with react.js',
-		highlights: {
-			bullets: [
-				'Full Stack web and mobile development',
-				'Interactive Front End as per the design',
-				'React and React-Native',
-				'Redux for State Management',
-				'Building REST API',
-				'Managing databases',
-			],
-			heading: 'Here are a few Highlights:',
-		},
-	};
-	const renderHighlight = () => {
-		return SCREEN_CONSTANTS.highlights.bullets.map((value, i) => (
-			<div className='highlight' key={i}>
-				<div className='highlight-blob'></div>
-				<div>
-					<span>{value}</span>
-				</div>
-			</div>
-		));
-	};
 
 	const handleTeacherName = (e) => {
 		setTeacherName(e.target.value);
@@ -76,7 +140,7 @@ export default function Teachers({ id }) {
 							/>
 						</div>
 					</div>
-					<div className='search-output'>{teacherName}</div>
+					<div className='search-output'>{teachers && Teachers()}</div>
 
 					{/* <div className='about-me-profile'></div>
 					<div className='about-me-details'>
