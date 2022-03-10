@@ -17,15 +17,6 @@ export default function Teachers({ id }) {
 		Animations.animations.fadeInScreen(id);
 	};
 
-	// useEffect(() => {
-	// 	fetch('/teachers')
-	// 		.then(async (data) => {
-	// 			await data.json().then((data) => setTeachers(data));
-	// 		})
-
-	// 		.catch((err) => console.log(err));
-	// }, []);
-
 	useEffect(async () => {
 		await axios
 			.get('/teachers')
@@ -33,10 +24,6 @@ export default function Teachers({ id }) {
 				if (data) {
 					console.log('fetched data:');
 					console.log(data.data.Teachers.Teacher);
-
-					// for (let i = 0; i < 10; ++i) {
-					// 	setTeachers((prev) => [...prev, data.data.Teachers.Teacher[i]]);
-					// }
 
 					let newData = data.data.Teachers.Teacher;
 					setTeachers((prevState) => ({
@@ -48,59 +35,45 @@ export default function Teachers({ id }) {
 			.catch((err) => console.log(err));
 	}, []);
 
-	const Teachers = () => {
-		console.log('teachers:');
-
-		if (teachers[0]) {
-			for (let i = 0; i < 10; ++i) {
-				let name = teachers[0].Name._text;
-				let email = teachers[0].Email._text;
-				let phone = [
-					[teachers[0].Phone[0]._attributes.type, teachers[0].Phone[0]._text],
-					[teachers[0].Phone[1]._attributes.type, teachers[0].Phone[1]._text],
-				];
-				let subject = teachers[0].Subject._text;
-
-				return (
-					<div className='row  teacher-container'>
-						<div className='col-3'>
-							<span className='label'> name: </span>
-						</div>
-						<div className='col'>
-							<span> {name}</span>
-						</div>
-						<div className='w-100'></div>
-						<div className='col-3'>
-							<span className='label'> email: </span>
-						</div>
-						<div className='col'>
-							<span> {email} </span>
-						</div>
-						<div className='w-100'></div>
-						<div className='col-3'>
-							<span className='label'>{phone[0][0]}:</span>
-						</div>
-						<div className='col'>
-							<span>{phone[0][1]}</span>
-						</div>
-						<div className='w-100'></div>
-						<div className='col-3'>
-							<span className='label'>{phone[1][0]}:</span>
-						</div>
-						<div className='col'>
-							<span>{phone[1][1]}</span>
-						</div>
-						<div className='w-100'></div>
-						<div className='col-3'>
-							<span className='label'> subject:</span>
-						</div>
-						<div className='col'>
-							<span> {subject}</span>
-						</div>
-					</div>
-				);
-			}
-		}
+	const Teachers = ({ name, email, phoneMobile, phoneHome, subject }) => {
+		return (
+			<div className='row  teacher-container'>
+				<div className='col-3'>
+					<span className='label'> name: </span>
+				</div>
+				<div className='col'>
+					<span> {name}</span>
+				</div>
+				<div className='w-100'></div>
+				<div className='col-3'>
+					<span className='label'> email: </span>
+				</div>
+				<div className='col'>
+					<span> {email} </span>
+				</div>
+				<div className='w-100'></div>
+				<div className='col-3'>
+					<span className='label'>{phoneMobile[0]}:</span>
+				</div>
+				<div className='col'>
+					<span>{phoneMobile[1]}</span>
+				</div>
+				<div className='w-100'></div>
+				<div className='col-3'>
+					<span className='label'>{phoneHome[0]}:</span>
+				</div>
+				<div className='col'>
+					<span>{phoneHome[1]}</span>
+				</div>
+				<div className='w-100'></div>
+				<div className='col-3'>
+					<span className='label'> subject:</span>
+				</div>
+				<div className='col'>
+					<span> {subject}</span>
+				</div>
+			</div>
+		);
 	};
 
 	const fadeInSubscription =
@@ -140,7 +113,91 @@ export default function Teachers({ id }) {
 							/>
 						</div>
 					</div>
-					<div className='search-output'>{teachers && Teachers()}</div>
+					{/* <div className='search-output'>{teachers && loopTeachers()}</div> */}
+					<div className='search-output'>
+						<>
+							{teachers[0] && (
+								<Teachers
+									key={0}
+									name={teachers[0].Name && teachers[0].Name._text}
+									email={teachers[0].Email && teachers[0].Email._text}
+									phoneMobile={
+										teachers[0].Phone[0] && [
+											teachers[0].Phone[0]._attributes.type,
+											teachers[0].Phone[0]._text,
+										]
+									}
+									phoneHome={
+										teachers[0].Phone[1] && [
+											teachers[0].Phone[1]._attributes.type,
+											teachers[0].Phone[1]._text,
+										]
+									}
+									subject={teachers[0].Subject && teachers[0].Subject._text}
+								/>
+							)}
+							{teachers[1] && (
+								<Teachers
+									key={1}
+									name={teachers[1].Name && teachers[1].Name._text}
+									email={teachers[1].Email && teachers[1].Email._text}
+									phoneMobile={
+										teachers[1].Phone[0] && [
+											teachers[1].Phone[0]._attributes.type,
+											teachers[1].Phone[0]._text,
+										]
+									}
+									phoneHome={
+										teachers[1].Phone[1] && [
+											teachers[1].Phone[1]._attributes.type,
+											teachers[1].Phone[1]._text,
+										]
+									}
+									subject={teachers[1].Subject && teachers[1].Subject._text}
+								/>
+							)}
+							{teachers[1] && (
+								<Teachers
+									key={1}
+									name={teachers[1].Name && teachers[1].Name._text}
+									email={teachers[1].Email && teachers[1].Email._text}
+									phoneMobile={
+										teachers[1].Phone[0] && [
+											teachers[1].Phone[0]._attributes.type,
+											teachers[1].Phone[0]._text,
+										]
+									}
+									phoneHome={
+										teachers[1].Phone[1] && [
+											teachers[1].Phone[1]._attributes.type,
+											teachers[1].Phone[1]._text,
+										]
+									}
+									subject={teachers[1].Subject && teachers[1].Subject._text}
+								/>
+							)}
+							{teachers[1] && (
+								<Teachers
+									key={1}
+									name={teachers[1].Name && teachers[1].Name._text}
+									email={teachers[1].Email && teachers[1].Email._text}
+									phoneMobile={
+										teachers[1].Phone[0] && [
+											teachers[1].Phone[0]._attributes.type,
+											teachers[1].Phone[0]._text,
+										]
+									}
+									phoneHome={
+										teachers[1].Phone[1] && [
+											teachers[1].Phone[1]._attributes.type,
+											teachers[1].Phone[1]._text,
+										]
+									}
+									subject={teachers[1].Subject && teachers[1].Subject._text}
+								/>
+							)}
+						</>
+					</div>
 
 					{/* <div className='about-me-profile'></div>
 					<div className='about-me-details'>
