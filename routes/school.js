@@ -50,60 +50,65 @@ router.get('/childrens/:first/:last', (req, res) => {
 	let firstName = req.params['first'];
 	let lastName = req.params['last'];
 
-	console.log(req.params);
-
 	let result = '';
 	let sortedArr = [];
 
-	if (firstName || lastName) {
-		console.log('here!!');
-		console.log('first name: ', firstName);
-		console.log('last name: ', lastName);
+	try {
+		fs.readFile('./Samples/Children.xml', (err, data) => {
+			if (err) {
+				res.send('something went wrong');
+			}
+			result = convert.xml2json(data, { compact: true, spaces: 4 });
 
-		try {
-			fs.readFile('./Samples/Children.xml', (err, data) => {
-				if (err) {
-					res.send('something went wrong');
-				}
-				result = convert.xml2json(data, { compact: true, spaces: 4 });
-
-				if (result) {
-					Object.values(JSON.parse(result).Children.Child).map(
-						(element, index) => {
-							if (firstName !== '' || lastName !== '') {
-								if (
-									element.PersonDetails.Name.First._text === firstName &&
-									element.PersonDetails.Name.Last._text === lastName
-								) {
-									console.log(
-										'matched first name: ',
-										element.PersonDetails.Name.First._text
-									);
-									console.log(
-										'matched last name: ',
-										element.PersonDetails.Name.Last._text
-									);
-									sortedArr.push(element);
-								}
+			if (result) {
+				Object.values(JSON.parse(result).Children.Child).map(
+					(element, index) => {
+						if (firstName !== 'x' && lastName !== 'x') {
+							if (
+								element.PersonDetails.Name.First._text === firstName &&
+								element.PersonDetails.Name.Last._text === lastName
+							) {
+								console.log(
+									'matched first name: ',
+									element.PersonDetails.Name.First._text
+								);
+								console.log(
+									'matched last name: ',
+									element.PersonDetails.Name.Last._text
+								);
+								sortedArr.push(element);
+							}
+						} else if (firstName !== 'x' && lastName === 'x') {
+							if (
+								element.PersonDetails.Name.First._text === firstName ||
+								element.PersonDetails.Name.Last._text === firstName
+							) {
+								console.log(
+									'matched first name: ',
+									element.PersonDetails.Name.First._text
+								);
+								console.log(
+									'matched last name: ',
+									element.PersonDetails.Name.Last._text
+								);
+								sortedArr.push(element);
 							}
 						}
-					);
-					if (sortedArr.length === 0) {
-						res.status(400).json({
-							msg: `There is no one with the name ${firstName} ${lastName}`,
-						});
-					} else {
-						console.log('sorted array is:');
-						console.log(sortedArr[0].PersonDetails.Name.First._text);
-						res.send(sortedArr);
 					}
+				);
+				if (sortedArr.length === 0) {
+					res.status(400).json({
+						msg: `There is no one with the name ${firstName} ${lastName}`,
+					});
+				} else {
+					console.log('sorted array is:');
+					console.log(sortedArr[0].PersonDetails.Name.First._text);
+					res.send(sortedArr);
 				}
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	} else {
-		res.status(400).json({ msg: `There is no one with the name ${fullname}` });
+			}
+		});
+	} catch (err) {
+		console.log(err);
 	}
 });
 
@@ -143,6 +148,57 @@ router.get('/teachers/:name', (req, res) => {
 					(element, index) => {
 						if (element.Name._text === name) {
 							sortedArr.push(element);
+						}
+					}
+				);
+				if (sortedArr.length === 0) {
+					res
+						.status(400)
+						.json({ msg: `There is no one with the name ${name}` });
+				} else {
+					res.send(sortedArr);
+				}
+			}
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+// get a specific teacher
+router.get('/hobby/:name', (req, res) => {
+	let name = req.query.name;
+	let result = '';
+	let sortedArr = [];
+
+	console.log('server: hobby: ', name);
+	try {
+		fs.readFile('./Samples/Children.xml', (err, data) => {
+			if (err) {
+				res.send('something went wrong');
+			}
+			result = convert.xml2json(data, { compact: true, spaces: 4 });
+
+			if (res) {
+				Object.values(JSON.parse(result).Children.Child).map(
+					(element, index) => {
+						// console.log('element: ', Object.values(element.Hobby));
+
+						let temp = [];
+						if (typeof element.Hobby == 'object' && element.Hobby) {
+							if (element.Hobby.length > 1) {
+								element.Hobby.map((element) => {
+									temp.push(element._text);
+								});
+							}
+						}
+
+						if (temp.length > 0) {
+							Object.values(temp).map((hobby) => {
+								if (hobby === name) {
+									sortedArr.push(element);
+								}
+							});
 						}
 					}
 				);
