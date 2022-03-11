@@ -254,18 +254,18 @@ export default function Teachers({ id }) {
 							<label className='search-name-teacher'>Name:</label>
 							<input
 								type='text'
-								placeholder='Enter the name of the teacher'
+								placeholder='Search the teacher by name'
 								className='teacher-name-input'
-								onKeyPress={handlePressKeyTeacher}
-								value={teacherName}
-								onChange={handleTeacherName}
+								onKeyPress={handlePressKeyClass}
+								value={className}
+								onChange={handleClassName}
 							/>
 						</div>
 						<div className='col-sm search-label'>
 							<label className='search-name-teacher'>Class:</label>
 							<input
 								type='text'
-								placeholder='Enter the name of the class'
+								placeholder='Search teacher by class'
 								onKeyPress={handlePressKeyClass}
 								className='class-name-input'
 								value={className}

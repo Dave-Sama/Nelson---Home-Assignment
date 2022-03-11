@@ -116,7 +116,7 @@ input:focus::placeholder {
 	display: flex;
 	vertical-align: center;
 	background-color: #eeeeee;
-	border-radius: 10px;
+	/* border-radius: 10px; */
 	text-align: center;
 	justify-content: center;
 	align-items: center;
