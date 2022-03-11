@@ -26,10 +26,7 @@ export default function Teachers({ id }) {
 			.then((data) => {
 				if (data) {
 					let newData = data.data.Teachers.Teacher;
-					setTeachers((prevState) => ({
-						...prevState,
-						...newData,
-					}));
+					setTeachers(newData);
 				}
 			})
 			.catch((err) => console.log(err));
@@ -179,34 +176,23 @@ export default function Teachers({ id }) {
 	};
 
 	const sortByTeacher = () => {
+		console.log('sorted teacher is: ', sortedTeacher.data);
 		return Object.values(sortedTeacher.data).map((value, index) => (
 			<Teachers
 				key={index}
-				name={teachers[index].Name && teachers[index].Name._text}
-				email={teachers[index].Email && teachers[index].Email._text}
+				name={value.Name && value.Name._text}
+				email={value.Email && value.Email._text}
 				phoneMobile={
-					teachers[index].Phone[0] !== undefined
-						? [
-								teachers[index].Phone[0]._attributes.type,
-								teachers[index].Phone[0]._text,
-						  ]
-						: [
-								teachers[index].Phone._attributes.type,
-								teachers[index].Phone._text,
-						  ]
+					value.Phone[0] !== undefined
+						? [value.Phone[0]._attributes.type, value.Phone[0]._text]
+						: [value.Phone._attributes.type, value.Phone._text]
 				}
 				phoneHome={
-					teachers[index].Phone[1] !== undefined
-						? [
-								teachers[index].Phone[1]._attributes.type,
-								teachers[index].Phone[1]._text,
-						  ]
-						: [
-								teachers[index].Phone._attributes.type,
-								teachers[index].Phone._text,
-						  ]
+					value.Phone[1] !== undefined
+						? [value.Phone[1]._attributes.type, value.Phone[1]._text]
+						: [value.Phone._attributes.type, value.Phone._text]
 				}
-				subject={teachers[index].Subject && teachers[index].Subject._text}
+				subject={value.Subject && value.Subject._text}
 			/>
 		));
 	};
@@ -216,31 +202,19 @@ export default function Teachers({ id }) {
 		return Object.values(sortedClass.data).map((value, index) => (
 			<Teachers
 				key={index}
-				name={teachers[index].Name && teachers[index].Name._text}
-				email={teachers[index].Email && teachers[index].Email._text}
+				name={value.Name && value.Name._text}
+				email={value.Email && value.Email._text}
 				phoneMobile={
-					teachers[index].Phone[0] !== undefined
-						? [
-								teachers[index].Phone[0]._attributes.type,
-								teachers[index].Phone[0]._text,
-						  ]
-						: [
-								teachers[index].Phone._attributes.type,
-								teachers[index].Phone._text,
-						  ]
+					value.Phone[0] !== undefined
+						? [value.Phone[0]._attributes.type, value.Phone[0]._text]
+						: [value.Phone._attributes.type, value.Phone._text]
 				}
 				phoneHome={
-					teachers[index].Phone[1] !== undefined
-						? [
-								teachers[index].Phone[1]._attributes.type,
-								teachers[index].Phone[1]._text,
-						  ]
-						: [
-								teachers[index].Phone._attributes.type,
-								teachers[index].Phone._text,
-						  ]
+					value.Phone[1] !== undefined
+						? [value.Phone[1]._attributes.type, value.Phone[1]._text]
+						: [value.Phone._attributes.type, value.Phone._text]
 				}
-				subject={teachers[index].Subject && teachers[index].Subject._text}
+				subject={value.Subject && value.Subject._text}
 			/>
 		));
 	};
