@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const fs = require('fs');
 var convert = require('xml-js');
-
+const _ = require('lodash');
 // get children
+
 router.get('/children', (req, res) => {
 	let result = '';
 	try {
@@ -11,7 +12,10 @@ router.get('/children', (req, res) => {
 				res.send('something went wrong');
 			}
 			result = convert.xml2json(data, { compact: true, spaces: 4 });
-			res.send(JSON.parse(result));
+
+			if (res) {
+				res.status(200).send(JSON.parse(result));
+			}
 		});
 	} catch (err) {
 		console.log(err);
@@ -37,6 +41,72 @@ router.get('/children/:num', (req, res) => {
 	}
 });
 
+// router.get('/childrens/:bla', (req, res) => {
+// 	res.send('<h1>Suka!</h1>');
+// });
+
+// get a specific teacher
+router.get('/childrens/:first/:last', (req, res) => {
+	let firstName = req.params['first'];
+	let lastName = req.params['last'];
+
+	console.log(req.params);
+
+	let result = '';
+	let sortedArr = [];
+
+	if (firstName || lastName) {
+		console.log('here!!');
+		console.log('first name: ', firstName);
+		console.log('last name: ', lastName);
+
+		try {
+			fs.readFile('./Samples/Children.xml', (err, data) => {
+				if (err) {
+					res.send('something went wrong');
+				}
+				result = convert.xml2json(data, { compact: true, spaces: 4 });
+
+				if (result) {
+					Object.values(JSON.parse(result).Children.Child).map(
+						(element, index) => {
+							if (firstName !== '' || lastName !== '') {
+								if (
+									element.PersonDetails.Name.First._text === firstName &&
+									element.PersonDetails.Name.Last._text === lastName
+								) {
+									console.log(
+										'matched first name: ',
+										element.PersonDetails.Name.First._text
+									);
+									console.log(
+										'matched last name: ',
+										element.PersonDetails.Name.Last._text
+									);
+									sortedArr.push(element);
+								}
+							}
+						}
+					);
+					if (sortedArr.length === 0) {
+						res.status(400).json({
+							msg: `There is no one with the name ${firstName} ${lastName}`,
+						});
+					} else {
+						console.log('sorted array is:');
+						console.log(sortedArr[0].PersonDetails.Name.First._text);
+						res.send(sortedArr);
+					}
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	} else {
+		res.status(400).json({ msg: `There is no one with the name ${fullname}` });
+	}
+});
+
 // get teachers
 router.get('/teachers', (req, res) => {
 	let result = '';
@@ -57,16 +127,65 @@ router.get('/teachers', (req, res) => {
 });
 
 // get a specific teacher
-router.get('/teachers/:num', (req, res) => {
-	let { num } = req.params;
+router.get('/teachers/:name', (req, res) => {
+	let name = req.query.name;
 	let result = '';
+	let sortedArr = [];
 	try {
 		fs.readFile('./Samples/Teachers.xml', (err, data) => {
 			if (err) {
 				res.send('something went wrong');
 			}
 			result = convert.xml2json(data, { compact: true, spaces: 4 });
-			res.send(JSON.parse(result).Teachers.Teacher[num]);
+
+			if (res) {
+				Object.values(JSON.parse(result).Teachers.Teacher).map(
+					(element, index) => {
+						if (element.Name._text === name) {
+							sortedArr.push(element);
+						}
+					}
+				);
+				if (sortedArr.length === 0) {
+					res
+						.status(400)
+						.json({ msg: `There is no one with the name ${name}` });
+				} else {
+					res.send(sortedArr);
+				}
+			}
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+// get a specific class
+router.get('/class/:name', (req, res) => {
+	let name = req.query.name;
+	let result = '';
+	let sortedArr = [];
+	try {
+		fs.readFile('./Samples/Teachers.xml', (err, data) => {
+			if (err) {
+				res.send('something went wrong');
+			}
+			result = convert.xml2json(data, { compact: true, spaces: 4 });
+
+			if (res) {
+				Object.values(JSON.parse(result).Teachers.Teacher).map(
+					(element, index) => {
+						if (element.Subject._text === name) {
+							sortedArr.push(element);
+						}
+					}
+				);
+				if (sortedArr.length === 0) {
+					res.status(400).json({ msg: `There isn't a class called ${name}` });
+				} else {
+					res.send(sortedArr);
+				}
+			}
 		});
 	} catch (err) {
 		console.log(err);

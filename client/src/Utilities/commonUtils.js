@@ -1,4 +1,5 @@
 import Home from '../SchoolContainer/Home/Home';
+import Children from '../SchoolContainer/Children/Children';
 import Teachers from '../SchoolContainer/Teachers/Teachers';
 
 export const TOTAL_SCREENS = [
@@ -9,6 +10,10 @@ export const TOTAL_SCREENS = [
 	{
 		screen_name: 'Teachers',
 		component: Teachers,
+	},
+	{
+		screen_name: 'Children',
+		component: Children,
 	},
 ];
 
