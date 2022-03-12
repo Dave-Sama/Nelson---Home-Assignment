@@ -59,20 +59,8 @@ export default function Header() {
 					<FontAwesomeIcon className='header-hamburger-bars' icon={faBars} />
 				</div>
 				<div className='header-logo'>
-					<span style={{ color: 'tomato', textShadow: '0px 4px  white' }}>
-						NELSON
-					</span>
-					<span
-						style={{
-							fontSize: 20,
-							margin: '10px',
-							color: `white`,
-							padding: '1px',
-							textShadow: '0px 1px  tomato',
-						}}
-					>
-						High School
-					</span>
+					<span>NELSON</span>
+					<span className='sub-logo'>High School</span>
 				</div>
 				<div
 					className={

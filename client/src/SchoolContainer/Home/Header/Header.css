@@ -28,8 +28,8 @@
 }
 
 .header-option {
-	text-shadow: 0px 1px 10px black;
-	font-size: 26px;
+	text-shadow: 0px 1px 2px black;
+	font-size: 20px;
 	cursor: pointer;
 	font-weight: 600;
 	color: #ffffff;
@@ -52,9 +52,31 @@
 	color: #ff5823;
 }
 
+.sub-logo {
+	font-size: 20;
+	margin: 10px;
+	color: white;
+	padding: 1px;
+	text-shadow: 0px 1px tomato;
+}
+
 @media only screen and (max-width: 1110px) {
 	.header-parent {
 		width: 80%;
+	}
+
+	.header-logo {
+		text-shadow: 0px 2px white;
+		font-size: 40px;
+		font-family: 'Poppins ExtraBold';
+		color: tomato;
+	}
+	.sub-logo {
+		font-size: 00px;
+		margin: 10px;
+		color: white;
+		padding: 1px;
+		text-shadow: 0px 1px;
 	}
 }
 @media only screen and (max-width: 970px) {
@@ -94,7 +116,7 @@
 		color: var(--white);
 	}
 	.header-hamburger-bars {
-		font-size: 30px;
+		font-size: 20px;
 		cursor: pointer;
 		margin: 0px 10px;
 		color: var(--white);
@@ -109,6 +131,13 @@
 @media only screen and (max-width: 1110px) {
 	header-parent {
 		width: 80%;
+	}
+
+	.header-container {
+		display: flex;
+		justify-content: center;
+		height: 130px;
+		color: var(--white);
 	}
 }
 @media only screen and (max-width: 970px) {
@@ -141,7 +170,7 @@
 		color: var(--white);
 	}
 	.header-hamburger-bars {
-		font-size: 36px;
+		font-size: 30px;
 		cursor: pointer;
 		margin: 0px 10px;
 		color: var(--white);

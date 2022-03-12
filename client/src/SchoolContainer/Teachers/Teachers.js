@@ -247,22 +247,24 @@ export default function Teachers({ id }) {
 	return (
 		<div className='about-me-container screen-container fade-in' id={id || ''}>
 			<div className='about-me-parent'>
-				<ScreenHeading title={'Teachers'} />
-				<div className='about-me-card'>
-					<div className='search'>
+				<div className='title'>
+					<ScreenHeading title={'Teachers'} />
+				</div>
+				<div className='teacher-card'>
+					<div className='search-teacher row'>
 						<div className='col-sm search-label'>
 							<label className='search-name-teacher'>Name:</label>
 							<input
 								type='text'
 								placeholder='Search the teacher by name'
 								className='teacher-name-input'
-								onKeyPress={handlePressKeyClass}
-								value={className}
-								onChange={handleClassName}
+								onKeyPress={handlePressKeyTeacher}
+								value={teacherName}
+								onChange={handleTeacherName}
 							/>
 						</div>
 						<div className='col-sm search-label'>
-							<label className='search-name-teacher'>Class:</label>
+							<label className='search-class-teacher '>Class:</label>
 							<input
 								type='text'
 								placeholder='Search teacher by class'

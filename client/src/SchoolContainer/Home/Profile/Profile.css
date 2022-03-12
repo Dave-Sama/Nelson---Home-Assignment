@@ -29,18 +29,44 @@
 	font-family: cursive;
 }
 
-.primary-text {
-	color: rgb(0, 0, 0);
-}
-
-/* .highlighted-text {
-	color: var(--dark-orange);
-} */
-
 .profile-role-tagline {
-	font-size: 19px;
+	font-size: 49px;
 	margin: 5px 0 0 0;
+	/* text-shadow: 1px 10px 10px black; */
+	text-shadow: 0 0 3px;
+	color: rgba(148, 148, 148, 0.6);
+	margin-right: 100px;
+	font-family: 'Poppins Light';
+}
+.this {
+	color: rgba(255, 255, 255, 0.81);
+	text-shadow: 1px 10px 5px rgb(95, 95, 95);
 	font-family: 'Poppins Medium';
+}
+.is {
+	font-family: 'Poppins Medium';
+	color: rgba(255, 255, 255, 0.81);
+	text-shadow: 1px 10px 5px rgb(95, 95, 95);
+}
+.where {
+	font-family: 'Poppins Medium';
+	color: rgba(255, 255, 255, 0.81);
+	text-shadow: 1px 10px 5px rgb(95, 95, 95);
+}
+.your {
+	font-family: 'Poppins Medium';
+	color: rgba(255, 255, 255, 0.81);
+	text-shadow: 1px 10px 5px rgb(95, 95, 95);
+}
+.future {
+	font-family: 'Poppins Medium';
+	color: rgba(255, 255, 255, 0.91);
+	text-shadow: 1px 10px 5px rgb(95, 95, 95);
+}
+.begins {
+	font-family: 'Poppins Medium';
+	color: rgb(255, 255, 255);
+	text-shadow: 1px 10px 5px rgb(95, 95, 95);
 }
 
 .highlighted-btn {
@@ -76,7 +102,6 @@
 .profile-picture-background {
 	height: 92%;
 	width: 92%;
-	background-image: url('../../../assets/Portfolio\ Image.jpeg');
 	background-size: cover;
 	border-radius: 50%;
 	background-repeat: no-repeat;
@@ -124,6 +149,20 @@
 		height: 320px;
 		width: 320px;
 		margin: 0 0 0 4px;
+	}
+	.future {
+		text-shadow: 2px 2px 2px rgb(160, 160, 160);
+		color: rgb(255, 255, 255);
+	}
+	.profile-role-tagline {
+		font-size: 20px;
+		text-align: center;
+		margin: 5px 0 0 0;
+		/* text-shadow: 1px 10px 10px black; */
+		text-shadow: 0 0 3px;
+		color: rgba(148, 148, 148, 0.6);
+		margin-right: 100px;
+		font-family: 'Poppins Light';
 	}
 }
 @media screen and (max-width: 810px) {
