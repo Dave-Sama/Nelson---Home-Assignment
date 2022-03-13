@@ -20,6 +20,13 @@
 	font-size: 55px;
 	font-family: 'Poppins ExtraBold';
 	color: var(--white);
+	color: tomato;
+	text-shadow: 0px 2px 0px white;
+}
+
+.sub-logo {
+	font-family: 'Poppins regular';
+	font-size: 20px;
 }
 
 .header-options {

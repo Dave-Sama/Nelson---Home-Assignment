@@ -27,6 +27,7 @@ const teachersURL =
 	'/' +
 	JSON.parse(swaggerTeachers).info.title;
 
+console.log(teachersURL);
 const childrenURL =
 	JSON.parse(swaggerChildren).host +
 	JSON.parse(swaggerChildren).basePath +
@@ -34,7 +35,7 @@ const childrenURL =
 	JSON.parse(swaggerChildren).info.title;
 
 /*
-	Default URL
+	Default URL - check if the swagger_Children_url is working.
 */
 router.get('/', (req, res) => {
 	res.json(JSON.parse(swaggerChildren));
@@ -50,6 +51,7 @@ router.get('/children', async (req, res) => {
 			if (err) {
 				res.send('something went wrong');
 			}
+			
 			result = convert.xml2json(data, { compact: true, spaces: 4 });
 			if (res) {
 				res.status(200).send(JSON.parse(result));

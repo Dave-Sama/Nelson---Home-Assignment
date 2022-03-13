@@ -5,6 +5,7 @@
 	justify-content: center;
 	height: 10%;
 	min-height: fit-content;
+	margin-left: 20px;
 }
 
 .profile-parent {
@@ -30,7 +31,7 @@
 }
 
 .profile-role-tagline {
-	font-size: 49px;
+	font-size: 39px;
 	margin: 5px 0 0 0;
 	/* text-shadow: 1px 10px 10px black; */
 	text-shadow: 0 0 3px;

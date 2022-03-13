@@ -38,28 +38,7 @@ export default function Teachers({ id }) {
 				key={index}
 				name={teachers[index].Name && teachers[index].Name._text}
 				email={teachers[index].Email && teachers[index].Email._text}
-				phoneMobile={
-					teachers[index].Phone[0] !== undefined
-						? [
-								teachers[index].Phone[0]._attributes.type,
-								teachers[index].Phone[0]._text,
-						  ]
-						: [
-								teachers[index].Phone._attributes.type,
-								teachers[index].Phone._text,
-						  ]
-				}
-				phoneHome={
-					teachers[index].Phone[1] !== undefined
-						? [
-								teachers[index].Phone[1]._attributes.type,
-								teachers[index].Phone[1]._text,
-						  ]
-						: [
-								teachers[index].Phone._attributes.type,
-								teachers[index].Phone._text,
-						  ]
-				}
+				phone={teachers[index].Phone}
 				subject={teachers[index].Subject && teachers[index].Subject._text}
 			/>
 		));
@@ -131,10 +110,35 @@ export default function Teachers({ id }) {
 		}
 	};
 
-	const Teachers = ({ name, email, phoneMobile, phoneHome, subject }) => {
-		if (phoneMobile[0] === phoneHome[0]) {
-			phoneHome = ['Work', '----------'];
+	const Teachers = ({ name, email, phone, subject }) => {
+		let phoneHome = ['Home'];
+		let phoneWork = ['Work'];
+		let phoneMobile = ['Mobile'];
+
+		// Check teacher phones
+		if (Array.isArray(Object.values(phone))) {
+			Object.values(phone).map((item, i) => {
+				if (item._attributes) {
+					if (item._attributes.type === 'mobile') {
+						phoneMobile.push(item._text);
+					} else if (item._attributes.type === 'work') {
+						phoneWork.push(item._text);
+					} else if (item._attributes.type === 'home') {
+						phoneHome.push(item._text);
+					}
+				}
+			});
+		} else {
+			console.log('phone:  ', phone);
+			if (Object.values(phone)._attributes.type === 'mobile') {
+				phoneMobile.push(Object.values(phone)._text);
+			} else if (Object.values(phone)._attributes.type === 'work') {
+				phoneWork.push(Object.values(phone)._text);
+			} else if (Object.values(phone)._attributes.type === 'home') {
+				phoneHome.push(Object.values(phone)._text);
+			}
 		}
+
 		return (
 			<div className='row  teacher-container'>
 				<div className='col-3'>
@@ -166,6 +170,13 @@ export default function Teachers({ id }) {
 				</div>
 				<div className='w-100'></div>
 				<div className='col-3'>
+					<span className='label'>{phoneHome && phoneWork[0]}:</span>
+				</div>
+				<div className='col'>
+					<span>{phoneHome && phoneWork[1]}</span>
+				</div>
+				<div className='w-100'></div>
+				<div className='col-3'>
 					<span className='label'> subject:</span>
 				</div>
 				<div className='col'>
@@ -182,16 +193,7 @@ export default function Teachers({ id }) {
 				key={index}
 				name={value.Name && value.Name._text}
 				email={value.Email && value.Email._text}
-				phoneMobile={
-					value.Phone[0] !== undefined
-						? [value.Phone[0]._attributes.type, value.Phone[0]._text]
-						: [value.Phone._attributes.type, value.Phone._text]
-				}
-				phoneHome={
-					value.Phone[1] !== undefined
-						? [value.Phone[1]._attributes.type, value.Phone[1]._text]
-						: [value.Phone._attributes.type, value.Phone._text]
-				}
+				phone={value.Phone}
 				subject={value.Subject && value.Subject._text}
 			/>
 		));
@@ -204,16 +206,7 @@ export default function Teachers({ id }) {
 				key={index}
 				name={value.Name && value.Name._text}
 				email={value.Email && value.Email._text}
-				phoneMobile={
-					value.Phone[0] !== undefined
-						? [value.Phone[0]._attributes.type, value.Phone[0]._text]
-						: [value.Phone._attributes.type, value.Phone._text]
-				}
-				phoneHome={
-					value.Phone[1] !== undefined
-						? [value.Phone[1]._attributes.type, value.Phone[1]._text]
-						: [value.Phone._attributes.type, value.Phone._text]
-				}
+				phone={value.Phone}
 				subject={value.Subject && value.Subject._text}
 			/>
 		));
@@ -251,7 +244,7 @@ export default function Teachers({ id }) {
 					<ScreenHeading title={'Teachers'} />
 				</div>
 				<div className='teacher-card'>
-					<div className='search-teacher row'>
+					<div className='search row'>
 						<div className='col-sm search-label'>
 							<label className='search-name-teacher'>Name:</label>
 							<input
